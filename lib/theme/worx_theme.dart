@@ -68,11 +68,12 @@ class WorxThemeData {
     brightness: Brightness.dark,
   );
 
+  static final Color dividerColor = Color(0xFFF0F0F0);
 
   static final TextTheme _textTheme = TextTheme(
     // headlineMedium: GoogleFonts.montserrat(fontWeight: _bold, fontSize: 20.0),
     // bodySmall: GoogleFonts.oswald(fontWeight: _semiBold, fontSize: 16.0),
-    // headlineSmall: GoogleFonts.oswald(fontWeight: _medium, fontSize: 16.0),
+    headlineSmall: TextStyle(fontFamily:'RobotoMono', fontWeight: FontWeight.w400, fontSize: 16.0),
      titleMedium: TextStyle(fontFamily: 'RobotoMono', fontWeight: FontWeight.w500, fontSize: 18.0),
     // labelSmall: GoogleFonts.montserrat(fontWeight: _medium, fontSize: 12.0),
     // bodyLarge: GoogleFonts.montserrat(fontWeight: _regular, fontSize: 14.0),
