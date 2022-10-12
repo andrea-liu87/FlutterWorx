@@ -79,7 +79,7 @@ class _CreateNewTeamState extends State<CreateNewTeam> {
               divider,
               Padding(padding: EdgeInsets.fromLTRB(16, 72, 16, 16),
                 child: FullWidthButton(
-                    backgroundColor: WorxThemeData.lightColorScheme.primary,
+                    backgroundColor: Theme.of(context).primaryColor,
                     title: 'Create New Team',
                     onPressed: () {
                       AppNavigator.push(Routes.createTeamSubmit);

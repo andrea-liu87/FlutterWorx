@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:worx/theme/worx_theme.dart';
 
 class WelcomeAppBar extends StatelessWidget with PreferredSizeWidget {
   final String title;
@@ -16,11 +15,11 @@ class WelcomeAppBar extends StatelessWidget with PreferredSizeWidget {
       iconTheme: IconThemeData(
         color: Colors.white, //change your color here
       ),
-      backgroundColor: WorxThemeData.lightColorScheme.primary,
+      backgroundColor: Theme.of(context).primaryColor,
       centerTitle: true,
       title: Text(
         title,
-        style: WorxThemeData.lightThemeData.textTheme.titleMedium?.copyWith(color: Colors.white),),
+        style: Theme.of(context).textTheme.titleMedium?.copyWith(color: Colors.white),),
       actions: <Widget>[
         Center(
           child: Container(

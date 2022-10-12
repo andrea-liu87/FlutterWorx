@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:worx/theme/worx_theme.dart';
 
 class FormTextField extends StatefulWidget {
     final String title;
@@ -30,12 +29,12 @@ class _FormTextFieldState extends State<FormTextField> {
         child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-                Text(widget.title, style: WorxThemeData.lightThemeData.textTheme.headlineSmall,),
+                Text(widget.title, style: Theme.of(context).textTheme.headlineSmall,),
                 SizedBox(height: 10,),
               TextFormField(
             keyboardType: widget.keyboardType,
             obscureText: _isPasswordTextVisible,
-            style: WorxThemeData.lightThemeData.textTheme.bodyMedium,
+            style: Theme.of(context).textTheme.bodyMedium,
             decoration: InputDecoration(
               labelText: 'Enter ${widget.title}',
               enabledBorder: UnderlineInputBorder(

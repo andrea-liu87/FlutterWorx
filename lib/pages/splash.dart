@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:worx/routes.dart';
-import 'package:worx/theme/worx_theme.dart';
 
 class SplashPage extends StatefulWidget {
   const SplashPage({
@@ -29,7 +28,7 @@ class _SplashPageState extends State<SplashPage> {
         Container(
           height: MediaQuery.of(context).size.height,
           width: MediaQuery.of(context).size.width,
-          color: WorxThemeData.lightColorScheme.primary,
+          color: Theme.of(context).primaryColor,
           child: Image.asset("assets/images/worx_logo.png"),
         ),
       ],

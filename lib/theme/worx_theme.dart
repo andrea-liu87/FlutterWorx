@@ -1,14 +1,13 @@
 import 'package:flutter/material.dart';
 
 class WorxThemeData {
-  static const _lightFillColor = Colors.black;
+  static const _defaultFillColor = Colors.black;
   static const _darkFillColor = Colors.white;
 
-  static final Color _lightFocusColor = Colors.black.withOpacity(0.12);
+  static final Color _defaultFocusColor = Colors.black.withOpacity(0.12);
   static final Color _darkFocusColor = Colors.white.withOpacity(0.12);
 
-  static ThemeData lightThemeData =
-  themeData(lightColorScheme, _lightFocusColor);
+  static ThemeData defaultThemeData = themeData(defaultColorScheme, _defaultFocusColor);
   static ThemeData darkThemeData = themeData(darkColorScheme, _darkFocusColor);
 
   static ThemeData themeData(ColorScheme colorScheme, Color focusColor) {
@@ -28,7 +27,7 @@ class WorxThemeData {
       snackBarTheme: SnackBarThemeData(
         behavior: SnackBarBehavior.floating,
         backgroundColor: Color.alphaBlend(
-          _lightFillColor.withOpacity(0.80),
+          _defaultFillColor.withOpacity(0.80),
           _darkFillColor,
         ),
         contentTextStyle: _textTheme.titleMedium?.apply(color: _darkFillColor),
@@ -36,7 +35,7 @@ class WorxThemeData {
     );
   }
 
-  static const ColorScheme lightColorScheme = ColorScheme(
+  static const ColorScheme defaultColorScheme = ColorScheme(
     primary: Color(0xFFDA3630),
     primaryContainer: Color(0xFF117378),
     secondary: Color(0xFFEFF3F3),
@@ -44,9 +43,9 @@ class WorxThemeData {
     background: Color(0x33000000),
     surface: Color(0xFFFAFBFB),
     onBackground: Colors.white,
-    error: _lightFillColor,
-    onError: _lightFillColor,
-    onPrimary: _lightFillColor,
+    error: _defaultFillColor,
+    onError: _defaultFillColor,
+    onPrimary: _defaultFillColor,
     onSecondary: Color(0xFF322942),
     onSurface: Color(0xFF241E30),
     brightness: Brightness.light,

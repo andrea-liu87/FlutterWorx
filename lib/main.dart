@@ -22,7 +22,7 @@ class WorxApp extends StatelessWidget {
         builder: (context) {
           return MaterialApp(
             title: 'Worx',
-            theme: WorxThemeData.lightThemeData,
+            theme: WorxThemeData.defaultThemeData,
             debugShowCheckedModeBanner: false,
             navigatorKey: AppNavigator.navigatorKey,
             onGenerateRoute: AppNavigator.onGenerateRoute,

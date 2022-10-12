@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:worx/theme/worx_theme.dart';
 
 class FullWidthButton extends StatelessWidget {
   final Color backgroundColor;
@@ -24,7 +23,7 @@ class FullWidthButton extends StatelessWidget {
         onPressed: onPressed,
         child: Text(
           title,
-          style: WorxThemeData.lightThemeData.textTheme.bodyMedium
+          style: Theme.of(context).textTheme.bodyMedium
               ?.copyWith(color: fontColor),
         ),
       );
