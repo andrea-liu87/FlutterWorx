@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:worx/routes.dart';
 import 'package:worx/theme/worx_theme.dart';
 import 'package:worx/widgets/app_bar.dart';
 import 'package:worx/widgets/buttons.dart';
@@ -80,7 +81,11 @@ class _CreateNewTeamState extends State<CreateNewTeam> {
                 child: FullWidthButton(
                     backgroundColor: WorxThemeData.lightColorScheme.primary,
                     title: 'Create New Team',
-                    onPressed: () {}),),
+                    onPressed: () {
+                      AppNavigator.push(Routes.createTeamSubmit);
+                    }
+                    ),
+              ),
             ],
           ),
         ),

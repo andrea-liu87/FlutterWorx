@@ -3,10 +3,12 @@ import 'package:worx/theme/worx_theme.dart';
 
 class WelcomeAppBar extends StatelessWidget with PreferredSizeWidget {
   final String title;
+  final double progress;
 
   WelcomeAppBar({
     Key? key,
-  required this.title}) : super(key: key);
+  required this.title,
+  this.progress = 0}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -28,7 +30,7 @@ class WelcomeAppBar extends StatelessWidget with PreferredSizeWidget {
             child: CircularProgressIndicator(
               strokeWidth: 2,
               valueColor: AlwaysStoppedAnimation(Colors.white),
-              value: 0.5,
+              value: progress,
               backgroundColor: Colors.white30,
             ),
           ),

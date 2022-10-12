@@ -1,15 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:worx/core/fade_page_route.dart';
 import 'package:worx/pages/create_new_team.dart';
+import 'package:worx/pages/create_team_submit.dart';
 import 'package:worx/pages/splash.dart';
 import 'package:worx/pages/welcome.dart';
 
-enum Routes { splash, welcome, createTeam, home}
+enum Routes { splash, welcome, createTeam, createTeamSubmit, home}
 
 class _Paths {
   static const String splash = '/';
   static const String welcome = '/welcome';
   static const String createTeam = '/welcome/createTeam';
+  static const String createTeamSubmit = '/welcome/createTeam/createTeamSubmit';
   static const String home = '/home';
 
 
@@ -17,6 +19,7 @@ class _Paths {
     Routes.splash: _Paths.splash,
     Routes.welcome: _Paths.welcome,
     Routes.createTeam: _Paths.createTeam,
+    Routes.createTeamSubmit: _Paths.createTeamSubmit,
     Routes.home: _Paths.home
   };
 
@@ -36,6 +39,9 @@ class AppNavigator {
 
       case _Paths.createTeam:
         return FadeRoute(page: CreateNewTeam());
+
+      case _Paths.createTeamSubmit:
+        return FadeRoute(page: CreateTeamSubmit());
 
       case _Paths.home:
       default:
