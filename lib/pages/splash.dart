@@ -17,19 +17,17 @@ class _SplashPageState extends State<SplashPage> {
   Widget build(BuildContext context) {
     return Stack(
       children: [
-        Container(
-          height: MediaQuery.of(context).size.height,
-          width: MediaQuery.of(context).size.width,
-          decoration: BoxDecoration(
-              image: DecorationImage(
-                  image: AssetImage("assets/images/horizontal.png"),
-                  repeat: ImageRepeat.repeatX)),
-        ),
-        Container(
-          height: MediaQuery.of(context).size.height,
-          width: MediaQuery.of(context).size.width,
-          color: Theme.of(context).primaryColor,
-          child: Image.asset("assets/images/worx_logo.png"),
+        GridPaper(
+          color: Colors.white.withOpacity(0.15),
+          interval: 65,
+          divisions: 1,
+          subdivisions: 1,
+          child: Container(
+            height: MediaQuery.of(context).size.height,
+            width: MediaQuery.of(context).size.width,
+            color: Theme.of(context).primaryColor,
+            child: Image.asset("assets/images/worx_logo.png"),
+          ),
         ),
       ],
     );

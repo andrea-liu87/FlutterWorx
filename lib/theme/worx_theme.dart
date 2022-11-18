@@ -12,6 +12,7 @@ class WorxThemeData {
 
   static ThemeData themeData(ColorScheme colorScheme, Color focusColor) {
     return ThemeData(
+      primaryColor: colorScheme.primary,
       colorScheme: colorScheme,
       textTheme: _textTheme,
       appBarTheme: AppBarTheme(

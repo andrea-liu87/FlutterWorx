@@ -15,7 +15,11 @@ class _WelcomePageState extends State<WelcomePage> {
     return Material(
       child: Column(
         children: [
-          Container(
+          GridPaper(
+            color: Colors.white.withOpacity(0.15),
+            interval: 65,
+            divisions: 1,
+            subdivisions: 1, child: Container (
             padding: EdgeInsets.symmetric(horizontal: 48),
             height: MediaQuery.of(context).size.height * 0.4,
             color: Theme.of(context).primaryColor,
@@ -45,6 +49,7 @@ class _WelcomePageState extends State<WelcomePage> {
                 ],
               ),
             ),
+          ),
           Container(
             height: MediaQuery.of(context).size.height * 0.6,
             width: MediaQuery.of(context).size.width,
