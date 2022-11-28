@@ -1,11 +1,14 @@
-import 'package:worx/data/api_data_source.dart';
-import 'package:worx/data/model/ResponseFormList.dart';
+import 'package:worx/data/remote/api_data_source.dart';
 
 class RemoteRepository {
   final ApiDataSource _apiProvider;
-  RemoteRepository(this._apiProvider);
+  const RemoteRepository(this._apiProvider);
 
-  Future<ResponseFormList> fetchTemplateForms() {
-    return _apiProvider.fetchTemplateForms();
+  Future<String> postCreateNewTeam(Map<String, String> form) async {
+    return _apiProvider.createNewTeam(form);
   }
+
+  // Future<ResponseFormList> fetchTemplateForms() {
+  //   return _apiProvider.fetchTemplateForms();
+  // }
 }

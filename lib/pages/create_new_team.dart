@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:worx/providers/create_new_team_provider.dart';
 import 'package:worx/routes.dart';
 import 'package:worx/theme/worx_theme.dart';
 import 'package:worx/widgets/app_bar.dart';
@@ -22,8 +24,12 @@ class _CreateNewTeamState extends State<CreateNewTeam> {
   double progressPhone = 0;
   double progressOrg = 0;
 
+  Map<String, String> form = Map();
+
   @override
   Widget build(BuildContext context) {
+    CreateNewTeamProvider provider = context.read<CreateNewTeamProvider>();
+
     return Scaffold(
       appBar: WelcomeAppBar(
           title: 'Create New Team',
@@ -81,7 +87,8 @@ class _CreateNewTeamState extends State<CreateNewTeam> {
                 child: FullWidthButton(
                     backgroundColor: Theme.of(context).primaryColor,
                     title: 'Create New Team',
-                    onPressed: () {
+                    onPressed: () async {
+                      provider.createNewTeam(context, form);
                       AppNavigator.push(Routes.createTeamSubmit);
                     }
                     ),
