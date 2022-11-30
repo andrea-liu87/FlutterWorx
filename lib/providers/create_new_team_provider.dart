@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:worx/data/model/create_team_model.dart';
 import 'package:worx/data/remote/remote_repository.dart';
 
 class CreateNewTeamProvider with ChangeNotifier {
@@ -9,17 +10,22 @@ class CreateNewTeamProvider with ChangeNotifier {
   bool _isLoading = false;
   bool get isLoading => _isLoading;
 
-  void createNewTeam(BuildContext context, Map<String, String> form) async {
+  void createNewTeam(BuildContext context, CreateTeamModel form, Function() nextAction) async {
     _isLoading = true;
     notifyListeners();
     final result = await _remoteRepository.postCreateNewTeam(form);
 
-    if (result == "error"){
-      ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(result.toString())));
-    }
-
-    _isLoading = false;
-    notifyListeners();
+    result.fold((messageError) {
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(messageError)));
+      _isLoading = false;
+      notifyListeners();
+      return;
+    }, (response) {
+      _isLoading = false;
+      notifyListeners();
+      nextAction();
+      return;
+    });
   }
 
 }

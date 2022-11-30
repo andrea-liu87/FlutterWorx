@@ -1,5 +1,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="id.worx.device.client.worx">
+
+    <uses-permission android:name="android.permission.INTERNET"/>
+
    <application
         android:label="worx"
         android:name="${applicationName}"
