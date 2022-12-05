@@ -31,7 +31,7 @@ class ApiDataSource{
       if (response.statusCode == 200){
         return Right(response);
       }
-      return const Left('Error post create team');
+      return const Left('Error get device status');
     } on DioError catch (e) {
       if (e.response != null) {
         Response response = e.response!;
@@ -39,13 +39,13 @@ class ApiDataSource{
           return Right(response);
         }
         else {
-          return Left(response.toString());
+          return Left('Http error ${e.response?.statusCode ??= 0}');
         }
       }
     } on Exception catch (e) {
       return Left(e.toString());
     }
-    return Left('Some error has happen');
+    return const Left('Unknown type error has happen');
   }
 
   Future<Either<String, Response>> createNewTeam(CreateTeamModel form) async {
@@ -59,12 +59,12 @@ class ApiDataSource{
       return const Left('Error post create team');
     } on DioError catch (e) {
       if (e.response != null){
-        return Left(e.response.toString());
+        return Left('Http error ${e.response?.statusCode ??= 0}');
       }
     } on Exception catch (e) {
       return Left(e.toString());
     }
-    return Left('Some error has happen');
+    return const Left('Unknown type error has happen');
   }
 
   Future<Either<String, Response>> joinTeam(CreateTeamModel form) async {
@@ -76,15 +76,15 @@ class ApiDataSource{
       if (response.statusCode == 200){
         return Right(response);
       }
-      return const Left('Error post create team');
+      return const Left('Error post join team');
     } on DioError catch (e) {
       if (e.response != null){
-        return Left(e.response.toString());
+        return Left('Http error ${e.response?.statusCode ??= 0}');
       }
     } on Exception catch (e) {
       return Left(e.toString());
     }
-    return Left('Some error has happen');
+    return Left('Unknown type error has happen');
   }
 
   // Future<ResponseFormList> fetchTemplateForms() async {

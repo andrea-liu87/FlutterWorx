@@ -15,6 +15,7 @@ class _CreateTeamSubmitState extends State<CreateTeamSubmit> {
   Widget build(BuildContext context) {
     SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle.dark);
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       body: Container(
         color: Colors.white,
         child: Column(
