@@ -2,6 +2,7 @@
     package="id.worx.device.client.worx">
 
     <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
    <application
         android:label="worx"

@@ -3,23 +3,50 @@ import 'dart:io';
 import 'package:dartz/dartz.dart';
 import 'package:device_info_plus/device_info_plus.dart';
 import 'package:dio/dio.dart';
-import 'package:dio_http_cache/dio_http_cache.dart';
+import 'package:dio_logging_interceptor/dio_logging_interceptor.dart';
 import 'package:flutter/material.dart';
 import 'package:worx/data/model/create_team_model.dart';
 
 class ApiDataSource{
   final Dio _dio;
 
-  final String _apiBaseUrl = "api.worx.dev.id";
+  final String _apiBaseUrl = "api.dev.worx.id";
   final String _apiPath = "/mobile";
 
   ApiDataSource(this._dio);
 
   // endpoint
+  final String _getDeviceInfo = "/devices/get-info-device";
   final String _createNewTeamEndPoint = "/users/create-new-team";
   final String _getTemplateFormsEndpoint = "/forms";
   final String _postSubmissionEndpoint = "/forms/submit";
   final String _getSubmissionEndpoint = "/forms/submissions";
+
+  Future<Either<String, Response>> getDeviceStatus() async {
+    try {
+      final Uri uri = _buildUri(_getDeviceInfo);
+      setupInterceptors();
+
+      final response = await _dio.get(uri.toString());
+      if (response.statusCode == 200){
+        return Right(response);
+      }
+      return const Left('Error post create team');
+    } on DioError catch (e) {
+      if (e.response != null) {
+        Response response = e.response!;
+        if (response.statusCode == 404 && response.data.toString().contains("ENTITY_NOT_FOUND_ERROR")) {
+          return Right(response);
+        }
+        else {
+          return Left(response.toString());
+        }
+      }
+    } on Exception catch (e) {
+      return Left(e.toString());
+    }
+    return Left('Some error has happen');
+  }
 
   Future<Either<String, Response>> createNewTeam(CreateTeamModel form) async {
     try {
@@ -34,7 +61,27 @@ class ApiDataSource{
       if (e.response != null){
         return Left(e.response.toString());
       }
-    } catch (e) {
+    } on Exception catch (e) {
+      return Left(e.toString());
+    }
+    return Left('Some error has happen');
+  }
+
+  Future<Either<String, Response>> joinTeam(CreateTeamModel form) async {
+    try {
+      final Uri uri = _buildUri(_createNewTeamEndPoint);
+      setupInterceptors();
+      print(_dio.options.headers.toString());
+      final response = await _dio.post(uri.toString(), data: FormData.fromMap(form.toJson()));
+      if (response.statusCode == 200){
+        return Right(response);
+      }
+      return const Left('Error post create team');
+    } on DioError catch (e) {
+      if (e.response != null){
+        return Left(e.response.toString());
+      }
+    } on Exception catch (e) {
       return Left(e.toString());
     }
     return Left('Some error has happen');
@@ -67,10 +114,16 @@ class ApiDataSource{
   }
 
   void setupInterceptors() async {
-    _dio.interceptors
-        .add(DioCacheManager(CacheConfig(baseUrl: _apiBaseUrl)).interceptor);
-    final deviceCode = await _getId();
-    _dio.options.headers.addAll({"deviceCode": deviceCode});
+    _dio.interceptors.add(InterceptorsWrapper(onRequest: (options, handler) async {
+      final deviceCode = await _getId();
+      _dio.lock();
+      options.headers['deviceCode'] = deviceCode;
+      handler.next(options);
+      _dio.unlock();
+    }));
+
+    final loggingInterceptor = DioLoggingInterceptor(level: Level.body, compact: false,);
+    _dio.interceptors.addAll([loggingInterceptor]);
   }
 
   Future<String?> _getId() async {

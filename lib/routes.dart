@@ -44,6 +44,7 @@ class AppNavigator {
         return FadeRoute(page: CreateTeamSubmit());
 
       case _Paths.home:
+        return FadeRoute(page: CreateTeamSubmit());
       default:
         return FadeRoute(page: SplashPage());
     }

@@ -36,6 +36,7 @@ dependencies:
   cupertino_icons: ^1.0.2
   dio_http_cache: ^0.3.0
   pretty_dio_logger: ^1.1.1
+  dio_logging_interceptor: ^1.0.1
   device_info_plus: ^3.2.3
   open_mail_app: ^0.4.5
   flutter_bloc: ^8.1.1

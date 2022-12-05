@@ -7,6 +7,10 @@ class RemoteRepository {
   final ApiDataSource _apiProvider;
   const RemoteRepository(this._apiProvider);
 
+  Future<Either<String, Response>> getDeviceInfo() async {
+    return _apiProvider.getDeviceStatus();
+  }
+
   Future<Either<String, Response>> postCreateNewTeam(CreateTeamModel form) async {
     return _apiProvider.createNewTeam(form);
   }
