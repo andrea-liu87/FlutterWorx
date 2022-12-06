@@ -18,7 +18,6 @@ class CreateNewTeamProvider with ChangeNotifier {
 
     result.fold((messageError) {
       ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(messageError)));
-      AppNavigator.push(Routes.createTeamSubmit);
       _isLoading = false;
       notifyListeners();
       return;

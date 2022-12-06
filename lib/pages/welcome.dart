@@ -70,7 +70,9 @@ class _WelcomePageState extends State<WelcomePage> {
                   margin: EdgeInsets.symmetric(horizontal: 16),
                   child: FullWidthButton(
                     backgroundColor: Theme.of(context).primaryColor.withAlpha(10),
-                    onPressed: () {},
+                    onPressed: () {
+                      AppNavigator.push(Routes.joinTeam);
+                    },
                     title: 'Join An Existing Team',
                     fontColor: Theme.of(context).primaryColor,
                   ),

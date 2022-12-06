@@ -2,10 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:worx/data/model/create_team_model.dart';
 import 'package:worx/providers/create_new_team_provider.dart';
-import 'package:worx/theme/worx_theme.dart';
 import 'package:worx/widgets/app_bar.dart';
 import 'package:worx/widgets/buttons.dart';
 import 'package:worx/widgets/text_field.dart';
+
+import '../constants.dart';
 
 class CreateNewTeam extends StatefulWidget {
   const CreateNewTeam({Key? key}) : super(key: key);
@@ -15,9 +16,6 @@ class CreateNewTeam extends StatefulWidget {
 }
 
 class _CreateNewTeamState extends State<CreateNewTeam> {
-  Widget divider = Container(height: 2,
-    color: WorxThemeData.dividerColor,
-    margin: EdgeInsets.symmetric(vertical: 12),);
   double progressName = 0;
   double progressEmail = 0;
   double progressPassword = 0;

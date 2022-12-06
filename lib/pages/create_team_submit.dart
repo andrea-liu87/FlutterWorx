@@ -3,14 +3,9 @@ import 'package:flutter/services.dart';
 import 'package:open_mail_app/open_mail_app.dart';
 import 'package:worx/widgets/buttons.dart';
 
-class CreateTeamSubmit extends StatefulWidget {
+class CreateTeamSubmit extends StatelessWidget {
   const CreateTeamSubmit({Key? key}) : super(key: key);
 
-  @override
-  State<CreateTeamSubmit> createState() => _CreateTeamSubmitState();
-}
-
-class _CreateTeamSubmitState extends State<CreateTeamSubmit> {
   @override
   Widget build(BuildContext context) {
     SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle.dark);

@@ -1,11 +1,11 @@
-import 'dart:io';
-
 import 'package:dartz/dartz.dart';
-import 'package:device_info_plus/device_info_plus.dart';
 import 'package:dio/dio.dart';
 import 'package:dio_logging_interceptor/dio_logging_interceptor.dart';
 import 'package:flutter/material.dart';
 import 'package:worx/data/model/create_team_model.dart';
+
+import '../../utility/common_function.dart';
+import '../model/join_team_model.dart';
 
 class ApiDataSource{
   final Dio _dio;
@@ -18,6 +18,7 @@ class ApiDataSource{
   // endpoint
   final String _getDeviceInfo = "/devices/get-info-device";
   final String _createNewTeamEndPoint = "/users/create-new-team";
+  final String _joinTeam = "devices/register";
   final String _getTemplateFormsEndpoint = "/forms";
   final String _postSubmissionEndpoint = "/forms/submit";
   final String _getSubmissionEndpoint = "/forms/submissions";
@@ -67,11 +68,10 @@ class ApiDataSource{
     return const Left('Unknown type error has happen');
   }
 
-  Future<Either<String, Response>> joinTeam(CreateTeamModel form) async {
+  Future<Either<String, Response>> joinTeam(JoinTeamModel form) async {
     try {
-      final Uri uri = _buildUri(_createNewTeamEndPoint);
+      final Uri uri = _buildUri(_joinTeam);
       setupInterceptors();
-      print(_dio.options.headers.toString());
       final response = await _dio.post(uri.toString(), data: FormData.fromMap(form.toJson()));
       if (response.statusCode == 200){
         return Right(response);
@@ -84,7 +84,7 @@ class ApiDataSource{
     } on Exception catch (e) {
       return Left(e.toString());
     }
-    return Left('Unknown type error has happen');
+    return const Left('Unknown type error has happen');
   }
 
   // Future<ResponseFormList> fetchTemplateForms() async {
@@ -115,7 +115,7 @@ class ApiDataSource{
 
   void setupInterceptors() async {
     _dio.interceptors.add(InterceptorsWrapper(onRequest: (options, handler) async {
-      final deviceCode = await _getId();
+      final deviceCode = await getId();
       _dio.lock();
       options.headers['deviceCode'] = deviceCode;
       handler.next(options);
@@ -124,17 +124,6 @@ class ApiDataSource{
 
     final loggingInterceptor = DioLoggingInterceptor(level: Level.body, compact: false,);
     _dio.interceptors.addAll([loggingInterceptor]);
-  }
-
-  Future<String?> _getId() async {
-    var deviceInfo = DeviceInfoPlugin();
-    if (Platform.isIOS) { // import 'dart:io'
-      var iosDeviceInfo = await deviceInfo.iosInfo;
-      return iosDeviceInfo.identifierForVendor; // unique ID on iOS
-    } else if(Platform.isAndroid) {
-      var androidDeviceInfo = await deviceInfo.androidInfo;
-      return androidDeviceInfo.androidId; // unique ID on Android
-    }
   }
 
   @visibleForTesting
