@@ -20,19 +20,7 @@ class WorxThemeData {
         elevation: 0,
         iconTheme: IconThemeData(color: colorScheme.primary),
       ),
-      iconTheme: IconThemeData(color: colorScheme.onPrimary),
-      canvasColor: colorScheme.background,
-      scaffoldBackgroundColor: colorScheme.background,
-      highlightColor: Colors.transparent,
-      focusColor: focusColor,
-      snackBarTheme: SnackBarThemeData(
-        behavior: SnackBarBehavior.floating,
-        backgroundColor: Color.alphaBlend(
-          _defaultFillColor.withOpacity(0.80),
-          _darkFillColor,
-        ),
-        contentTextStyle: _textTheme.titleMedium?.apply(color: _darkFillColor),
-      ),
+      backgroundColor: colorScheme.background,
     );
   }
 
@@ -41,7 +29,7 @@ class WorxThemeData {
     primaryContainer: Color(0xFF117378),
     secondary: Color(0xFFEFF3F3),
     secondaryContainer: Color(0xFFFAFBFB),
-    background: Color(0x33000000),
+    background: Color(0xFFF9F9F9),
     surface: Color(0xFFFAFBFB),
     onBackground: Colors.white,
     error: _defaultFillColor,
@@ -70,8 +58,8 @@ class WorxThemeData {
 
   static final Color dividerColor = Color(0xFFF0F0F0);
 
-  static final TextTheme _textTheme = TextTheme(
-    // headlineMedium: GoogleFonts.montserrat(fontWeight: _bold, fontSize: 20.0),
+  static const TextTheme _textTheme = TextTheme(
+    headlineMedium: TextStyle(fontFamily:'RobotoMono', fontWeight: FontWeight.w700, fontSize: 20.0),
     // bodySmall: GoogleFonts.oswald(fontWeight: _semiBold, fontSize: 16.0),
     headlineSmall: TextStyle(fontFamily:'RobotoMono', fontWeight: FontWeight.w400, fontSize: 16.0),
      titleMedium: TextStyle(fontFamily: 'RobotoMono', fontWeight: FontWeight.w500, fontSize: 18.0),

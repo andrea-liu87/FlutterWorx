@@ -4,6 +4,7 @@ import 'package:worx/data/remote/remote_repository.dart';
 import 'package:worx/injector.dart';
 import 'package:worx/providers/create_new_team_provider.dart';
 import 'package:worx/providers/get_device_info_provider.dart';
+import 'package:worx/providers/home_page_provider.dart';
 import 'package:worx/providers/join_team_provider.dart';
 import 'package:worx/routes.dart';
 import 'package:worx/theme/worx_theme.dart';
@@ -31,7 +32,8 @@ class WorxApp extends StatelessWidget {
           providers: [
             ChangeNotifierProvider(create: (_) => GetDeviceInfoProvider(injector<RemoteRepository>()),),
             ChangeNotifierProvider(create: (_) => CreateNewTeamProvider(injector<RemoteRepository>()),),
-            ChangeNotifierProvider(create: (_) => JoinTeamProvider(injector<RemoteRepository>()),)
+            ChangeNotifierProvider(create: (_) => JoinTeamProvider(injector<RemoteRepository>()),),
+            ChangeNotifierProvider(create: (_) => HomePageProvider(injector<RemoteRepository>()),),
           ],
           child: MaterialApp(
             title: 'Worx',

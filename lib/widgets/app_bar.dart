@@ -42,3 +42,34 @@ class WelcomeAppBar extends StatelessWidget with PreferredSizeWidget {
   Size get preferredSize => Size.fromHeight(kToolbarHeight);
 }
 
+class HomeAppBar extends StatelessWidget with PreferredSizeWidget {
+  final String title;
+
+  HomeAppBar({
+    Key? key,
+    required this.title}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return AppBar(
+      leading: const Icon(Icons.access_alarm),
+      iconTheme: const IconThemeData(
+        color: Colors.white, //change your color here
+      ),
+      backgroundColor: Theme.of(context).primaryColor,
+      titleSpacing: 0.0,
+      title: Text(
+        title,
+        style: Theme.of(context).textTheme.headlineSmall?.copyWith(color: Colors.white),
+        overflow: TextOverflow.ellipsis,),
+      actions: <Widget>[
+        IconButton(padding: const EdgeInsets.all(0),onPressed: (){}, icon: Image.asset('assets/images/ic_search.png')),
+        IconButton(onPressed: (){}, icon: Image.asset('assets/images/ic_settings.png'))
+      ],
+    );
+  }
+
+  @override
+  Size get preferredSize => const Size.fromHeight(kToolbarHeight);
+}
+

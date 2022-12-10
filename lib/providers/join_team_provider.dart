@@ -12,15 +12,17 @@ class JoinTeamProvider with ChangeNotifier {
 
   void sendJoinRequest(BuildContext context, String name, String org) async {
     AppNavigator.push(Routes.joinTeamSubmit);
+    var deviceData = await getDeviceInfo();
+    var appVersion = await getAppVersion();
     JoinTeamModel form = JoinTeamModel(
-      label: name,
+      label: 'Andrea',
       port: 443,
       ip: 'api.dev.worx.id',
-      organizationCode: org,
-      deviceCode: await getId(),
-      deviceModel: await getDeviceModel(),
-      deviceOsVersion: await getDeviceOs(),
-      deviceAppVersion: await getAppVersion(),
+      organizationCode: 'WXWSR73',
+      deviceCode: deviceData?['id'] ??= '',
+      deviceModel: deviceData?['model'] ??= '',
+      deviceOsVersion: deviceData?['os'] ??= '',
+      deviceAppVersion: appVersion,
       deviceLanguage: Localizations.localeOf(context).languageCode,
     );
     final result = await _remoteRepository.postJoinTeam(form);

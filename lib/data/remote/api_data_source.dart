@@ -18,7 +18,7 @@ class ApiDataSource{
   // endpoint
   final String _getDeviceInfo = "/devices/get-info-device";
   final String _createNewTeamEndPoint = "/users/create-new-team";
-  final String _joinTeam = "devices/register";
+  final String _joinTeam = "/devices/register";
   final String _getTemplateFormsEndpoint = "/forms";
   final String _postSubmissionEndpoint = "/forms/submit";
   final String _getSubmissionEndpoint = "/forms/submissions";
@@ -53,7 +53,7 @@ class ApiDataSource{
     try {
       final Uri uri = _buildUri(_createNewTeamEndPoint);
       setupInterceptors();
-      final response = await _dio.post(uri.toString(), data: FormData.fromMap(form.toJson()));
+      final response = await _dio.post(uri.toString(), data: form.toJson());
       if (response.statusCode == 200){
         return Right(response);
       }
@@ -72,7 +72,7 @@ class ApiDataSource{
     try {
       final Uri uri = _buildUri(_joinTeam);
       setupInterceptors();
-      final response = await _dio.post(uri.toString(), data: FormData.fromMap(form.toJson()));
+      final response = await _dio.post(uri.toString(), data: form.toJson());
       if (response.statusCode == 200){
         return Right(response);
       }

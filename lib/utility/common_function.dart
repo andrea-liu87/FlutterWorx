@@ -14,25 +14,21 @@ Future<String?> getId() async {
   }
 }
 
-Future<String?> getDeviceModel() async {
+Future<Map?> getDeviceInfo() async {
   var deviceInfo = DeviceInfoPlugin();
-  if (Platform.isIOS) {
+  var deviceData = Map();
+  if (Platform.isIOS) { // import 'dart:io'
     var iosDeviceInfo = await deviceInfo.iosInfo;
-    return iosDeviceInfo.model;
+    deviceData['id'] = iosDeviceInfo.identifierForVendor;
+    deviceData['model'] = iosDeviceInfo.model;
+    deviceData['os'] = '${iosDeviceInfo.systemName} ${iosDeviceInfo.systemVersion}';
+    return deviceData; // unique ID on iOS
   } else if(Platform.isAndroid) {
     var androidDeviceInfo = await deviceInfo.androidInfo;
-    return '${androidDeviceInfo.manufacturer} ${androidDeviceInfo.model}';
-  }
-}
-
-Future<String?> getDeviceOs() async {
-  var deviceInfo = DeviceInfoPlugin();
-  if (Platform.isIOS) {
-    var iosDeviceInfo = await deviceInfo.iosInfo;
-    return '${iosDeviceInfo.systemName} ${iosDeviceInfo.systemVersion}';
-  } else if(Platform.isAndroid) {
-    var androidDeviceInfo = await deviceInfo.androidInfo;
-    return androidDeviceInfo.version.sdkInt.toString();
+    deviceData['model'] = '${androidDeviceInfo.manufacturer} ${androidDeviceInfo.model}';
+    deviceData['id'] = androidDeviceInfo.androidId;
+    deviceData['os'] = androidDeviceInfo.version.sdkInt.toString();
+    return deviceData; // unique ID on Android
   }
 }
 
