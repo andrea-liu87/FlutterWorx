@@ -16,10 +16,10 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+
   @override
   Widget build(BuildContext context) {
     HomePageProvider provider = Provider.of(context, listen: true);
-    print(provider.currentPage);
     return Scaffold(
       backgroundColor: Theme.of(context).backgroundColor,
       appBar: HomeAppBar(
@@ -28,12 +28,19 @@ class _HomePageState extends State<HomePage> {
       body: ConstrainedBox(
           constraints: const BoxConstraints.expand(),
           child: (provider.currentPage == 0)
-            ? FormScreen (title: 'Forms', listView : FormListView())
+            ? FormScreen (title: 'Forms', listView : FormListView(formList: provider.emptyForms,))
             : (provider.currentPage == 1)
                 ? FormScreen (title: 'Drafts', listView : DraftListView())
                 : FormScreen (title: 'Submission', listView : SubmissionListView()),
       ),
     );
+  }
+
+  @override
+  void initState() {
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      context.read<HomePageProvider>().getTemplateForms(context);
+    });
   }
 }
 

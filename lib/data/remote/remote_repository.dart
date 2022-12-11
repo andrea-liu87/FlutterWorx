@@ -4,6 +4,7 @@ import 'package:worx/data/model/create_team_model.dart';
 import 'package:worx/data/remote/api_data_source.dart';
 
 import '../model/join_team_model.dart';
+import '../model/response_form_list.dart';
 
 class RemoteRepository {
   final ApiDataSource _apiProvider;
@@ -21,7 +22,7 @@ class RemoteRepository {
     return _apiProvider.joinTeam(form);
   }
 
-  // Future<ResponseFormList> fetchTemplateForms() {
-  //   return _apiProvider.fetchTemplateForms();
-  // }
+  Future<ResponseFormList> fetchTemplateForms() {
+    return _apiProvider.fetchTemplateForms();
+  }
 }

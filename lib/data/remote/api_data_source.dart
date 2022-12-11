@@ -1,8 +1,12 @@
+import 'dart:developer';
+
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
+import 'package:dio_http_cache/dio_http_cache.dart';
 import 'package:dio_logging_interceptor/dio_logging_interceptor.dart';
 import 'package:flutter/material.dart';
 import 'package:worx/data/model/create_team_model.dart';
+import 'package:worx/data/model/response_form_list.dart';
 
 import '../../utility/common_function.dart';
 import '../model/join_team_model.dart';
@@ -87,23 +91,23 @@ class ApiDataSource{
     return const Left('Unknown type error has happen');
   }
 
-  // Future<ResponseFormList> fetchTemplateForms() async {
-  //   try {
-  //     final Uri uri = _buildUri(_getTemplateFormsEndpoint);
-  //     final Response<Map<String, dynamic>> response = await _dio.get(
-  //         uri.toString(),
-  //         options: buildCacheOptions(Duration(days: 7), forceRefresh: true));
-  //     if (response.statusCode == 200) {
-  //       return ResponseFormList.fromJson(response.data!);
-  //     } else {
-  //       return ResponseFormList.withErrorCode(response.statusCode);
-  //     }
-  //   } catch (exc, stacktrace) {
-  //     log("Exception occurred: $exc stack trace: ${stacktrace.toString()}");
-  //
-  //     return ResponseFormList.withErrorCode(exc);
-  //   }
-  // }
+  Future<ResponseFormList> fetchTemplateForms() async {
+    try {
+      final Uri uri = _buildUri(_getTemplateFormsEndpoint);
+      final Response<Map<String, dynamic>> response = await _dio.get(
+          uri.toString(),
+          options: buildCacheOptions(const Duration(days: 7), forceRefresh: true));
+      if (response.statusCode == 200) {
+        return ResponseFormList.fromJson(response.data!);
+      } else {
+        return ResponseFormList.withErrorCode(response.statusCode.toString());
+      }
+    } catch (exc, stacktrace) {
+      log("Exception occurred: $exc stack trace: ${stacktrace.toString()}");
+
+      return ResponseFormList.withErrorCode(exc.toString());
+    }
+  }
 
   Uri _buildUri(String endpoint) {
     return Uri(

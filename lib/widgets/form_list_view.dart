@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
 
+import '../data/model/empty_form.dart';
 import 'bottom_nav_view.dart';
 
 class FormListView extends StatelessWidget {
-  const FormListView({
+  List<EmptyForm> formList;
+
+  FormListView({
+    required this.formList,
     Key? key,
   }) : super(key: key);
 
@@ -12,7 +16,7 @@ class FormListView extends StatelessWidget {
     return ListView.separated(
         separatorBuilder: (context, index) => const SizedBox(height: 12,),
         padding: const EdgeInsets.symmetric(horizontal: 16),
-        itemCount: 3,
+        itemCount: formList.length,
         itemBuilder: (BuildContext context, int index) {
           return Container(
             decoration: BoxDecoration(
@@ -33,9 +37,12 @@ class FormListView extends StatelessWidget {
                   padding: const EdgeInsets.symmetric(vertical: 13),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
-                    children: const [
-                      Text('Form Title'),
-                      Text('Form Description')
+                    children: [
+                      Text(
+                        formList[index].label ??= '',
+                        overflow: TextOverflow.ellipsis,),
+                      Text(formList[index].description ??= '',
+                      overflow: TextOverflow.ellipsis,)
                     ],
                   ),
                 ),
