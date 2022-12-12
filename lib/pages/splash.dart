@@ -1,3 +1,4 @@
+import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:worx/providers/get_device_info_provider.dart';
@@ -45,9 +46,22 @@ class _SplashPageState extends State<SplashPage> {
   }
 
   @override
-  void initState() {
-    WidgetsBinding.instance.addPostFrameCallback((_) {
+  void initState()  {
+    super.initState();
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        _loadData(context);
+      });
+  }
+
+  void _loadData(BuildContext context) async{
+    var connectivityResult = await (Connectivity().checkConnectivity());
+    if (connectivityResult == ConnectivityResult.mobile ||
+        connectivityResult == ConnectivityResult.wifi) {
+      if (!mounted) return;
       context.read<GetDeviceInfoProvider>().getDeviceInfo(context);
-    });
+    } else {
+      if (!mounted) return;
+        context.read<GetDeviceInfoProvider>().offlineChecking(context);
+    }
   }
 }

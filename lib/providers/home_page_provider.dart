@@ -21,16 +21,18 @@ class HomePageProvider with ChangeNotifier {
   List<EmptyForm> _emptyForms = [];
   List<EmptyForm> get emptyForms => _emptyForms;
 
-  void getTemplateForms(BuildContext context) async {
+  void getTemplateForms(BuildContext context, [bool mounted = true]) async {
     _isLoading = true;
     notifyListeners();
     final result = await _remoteRepository.fetchTemplateForms();
 
-    if (result.success){
+    if (result.list.isNotEmpty || result.list != null){
+      print(result.list.length);
       _emptyForms = result.list;
       _isLoading = false;
       notifyListeners();
     } else {
+      if (!mounted) return;
       ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Error ${result.error}')));
       _isLoading = false;
       notifyListeners();

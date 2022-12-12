@@ -32,4 +32,16 @@ class GetDeviceInfoProvider with ChangeNotifier {
     });
   }
 
+  void offlineChecking(BuildContext context) async {
+    _isLoading = true;
+    notifyListeners();
+    final result = await _remoteRepository.fetchTemplateForms();
+
+    _isLoading = false;
+    if (result.list.isNotEmpty || result.list != null) {
+      AppNavigator.replaceWith(Routes.home);
+    } else {
+      AppNavigator.replaceWith(Routes.welcome);
+    }
+  }
 }

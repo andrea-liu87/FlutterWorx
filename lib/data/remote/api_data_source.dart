@@ -94,10 +94,14 @@ class ApiDataSource{
   Future<ResponseFormList> fetchTemplateForms() async {
     try {
       final Uri uri = _buildUri(_getTemplateFormsEndpoint);
+      setupInterceptors();
       final Response<Map<String, dynamic>> response = await _dio.get(
           uri.toString(),
-          options: buildCacheOptions(const Duration(days: 7), forceRefresh: true));
-      if (response.statusCode == 200) {
+          options: buildCacheOptions(
+              Duration.zero,
+              maxStale: const Duration(days:30),
+              forceRefresh: true));
+      if (response.statusCode == 200 ) {
         return ResponseFormList.fromJson(response.data!);
       } else {
         return ResponseFormList.withErrorCode(response.statusCode.toString());
@@ -118,6 +122,9 @@ class ApiDataSource{
   }
 
   void setupInterceptors() async {
+    _dio.interceptors.add(DioCacheManager(CacheConfig()).interceptor);
+    _dio.options.connectTimeout = 10000; //5s
+    _dio.options.receiveTimeout = 10000;
     _dio.interceptors.add(InterceptorsWrapper(onRequest: (options, handler) async {
       final deviceCode = await getId();
       _dio.lock();
