@@ -30,7 +30,7 @@ class _HomePageState extends State<HomePage> {
           child: (provider.currentPage == 0)
             ? FormScreen (title: 'Forms', listView : FormListView(formList: provider.emptyForms,))
             : (provider.currentPage == 1)
-                ? FormScreen (title: 'Drafts', listView : const DraftListView())
+                ? FormScreen (title: 'Drafts', listView : DraftListView(formList: []))
                 : FormScreen (title: 'Submission', listView : SubmissionListView(data: provider.submissionForms,)),
       ),
     );
@@ -74,3 +74,33 @@ class FormScreen extends StatelessWidget {
     );
   }
 }
+
+class EmptyScreen extends StatelessWidget {
+  String title;
+  String description;
+  String image;
+
+  EmptyScreen({Key? key,
+  required this.title, required this.description, required this.image}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: MediaQuery.of(context).size.width,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          mainAxisSize: MainAxisSize.max,
+          crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          Image.asset(image),
+          const SizedBox(height: 42,),
+          Text(title, style: Theme.of(context).textTheme.headlineSmall,),
+          const SizedBox(height: 12),
+          Text(description, style: Theme.of(context).textTheme.bodyMedium,),
+          const SizedBox(height: 56)
+        ],
+      ),
+    );
+  }
+}
+

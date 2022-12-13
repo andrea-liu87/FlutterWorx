@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:worx/pages/home_page.dart';
 
 import '../data/model/form/empty_form.dart';
 import 'bottom_nav_view.dart';
@@ -13,6 +14,12 @@ class FormListView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    if (formList.isEmpty ){
+      return EmptyScreen(
+          title: 'No Forms',
+          description: 'You currently not signed to any forms. Please contact your admin to add forms to your device.',
+          image: 'assets/images/empty_forms.png');
+    } else
     return ListView.separated(
         separatorBuilder: (context, index) => const SizedBox(height: 12,),
         padding: const EdgeInsets.symmetric(horizontal: 16),
