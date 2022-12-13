@@ -30,8 +30,8 @@ class _HomePageState extends State<HomePage> {
           child: (provider.currentPage == 0)
             ? FormScreen (title: 'Forms', listView : FormListView(formList: provider.emptyForms,))
             : (provider.currentPage == 1)
-                ? FormScreen (title: 'Drafts', listView : DraftListView())
-                : FormScreen (title: 'Submission', listView : SubmissionListView()),
+                ? FormScreen (title: 'Drafts', listView : const DraftListView())
+                : FormScreen (title: 'Submission', listView : SubmissionListView(data: provider.submissionForms,)),
       ),
     );
   }
@@ -40,6 +40,7 @@ class _HomePageState extends State<HomePage> {
   void initState() {
     WidgetsBinding.instance.addPostFrameCallback((_) {
       context.read<HomePageProvider>().getTemplateForms(context);
+      context.read<HomePageProvider>().getSubmissionForms(context);
     });
   }
 }

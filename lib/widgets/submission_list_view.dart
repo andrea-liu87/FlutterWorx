@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
+import 'package:worx/data/model/form/submission_form.dart';
 
 class SubmissionListView extends StatelessWidget {
-  const SubmissionListView({
-    Key? key,
+  List<SubmissionForm> data;
+
+  SubmissionListView({
+    Key? key, required this.data
   }) : super(key: key);
 
   @override
@@ -27,19 +31,36 @@ class SubmissionListView extends StatelessWidget {
                   padding: EdgeInsets.symmetric(horizontal: 20),
                   child: Image(image: AssetImage('assets/images/ic_tick_green.png')),
                 ),
-                Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 13),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: const [
-                      Text('Form Title'),
-                      Text('Form Description')
-                    ],
+                Expanded(
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 13),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          data[index].label ??= '',
+                          style: Theme.of(context).textTheme.bodyMedium,
+                          overflow: TextOverflow.ellipsis,
+                        ),
+                        const SizedBox(height: 2,),
+                        Text( _formatDate(data[index].submitDate),
+                          style: Theme.of(context).textTheme.bodySmall,
+                          softWrap: false,
+                          overflow: TextOverflow.fade,
+                        )
+                      ],
+                    ),
                   ),
                 ),
               ],
             ),
           );
         });
+  }
+
+  String _formatDate(String? date){
+    if (date == null) return 'No submitted date';
+    var dateTime = DateFormat("yyyy-MM-ddTHH:mm:ss.SSSSSS'Z").parse(date);
+    return 'Submitted on ${DateFormat("dd/MM/yyyy hh:mm a").format(dateTime)}';
   }
 }

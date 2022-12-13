@@ -25,4 +25,8 @@ class RemoteRepository {
   Future<ResponseFormList> fetchTemplateForms() {
     return _apiProvider.fetchTemplateForms();
   }
+
+  Future<SubmissionFormResponse> fetchSubmissionForms() {
+    return _apiProvider.fetchSubmissionForms();
+  }
 }

@@ -97,10 +97,7 @@ class ApiDataSource{
       setupInterceptors();
       final Response<Map<String, dynamic>> response = await _dio.get(
           uri.toString(),
-          options: buildCacheOptions(
-              Duration.zero,
-              maxStale: const Duration(days:30),
-              forceRefresh: true));
+          options: _cacheOptions());
       if (response.statusCode == 200 ) {
         return ResponseFormList.fromJson(response.data!);
       } else {
@@ -113,6 +110,32 @@ class ApiDataSource{
     }
   }
 
+  Future<SubmissionFormResponse> fetchSubmissionForms() async {
+    try {
+      final Uri uri = _buildUri(_getSubmissionEndpoint);
+      setupInterceptors();
+      final Response<Map<String, dynamic>> response = await _dio.get(
+          uri.toString(),
+          options: _cacheOptions());
+      if (response.statusCode == 200 ) {
+        return SubmissionFormResponse.fromJson(response.data!);
+      } else {
+        return SubmissionFormResponse.withErrorCode(response.statusCode.toString());
+      }
+    } catch (exc, stacktrace) {
+      log("Exception occurred: $exc stack trace: ${stacktrace.toString()}");
+
+      return SubmissionFormResponse.withErrorCode(exc.toString());
+    }
+  }
+
+  Options _cacheOptions() {
+    return buildCacheOptions(
+        Duration.zero,
+        maxStale: const Duration(days:30),
+        forceRefresh: true);
+  }
+
   Uri _buildUri(String endpoint) {
     return Uri(
       scheme: "https",
@@ -123,8 +146,8 @@ class ApiDataSource{
 
   void setupInterceptors() async {
     _dio.interceptors.add(DioCacheManager(CacheConfig()).interceptor);
-    _dio.options.connectTimeout = 10000; //5s
-    _dio.options.receiveTimeout = 10000;
+    _dio.options.connectTimeout = 10000; //10s
+    _dio.options.receiveTimeout = 50000;
     _dio.interceptors.add(InterceptorsWrapper(onRequest: (options, handler) async {
       final deviceCode = await getId();
       _dio.lock();

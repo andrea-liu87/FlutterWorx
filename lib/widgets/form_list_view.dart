@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../data/model/empty_form.dart';
+import '../data/model/form/empty_form.dart';
 import 'bottom_nav_view.dart';
 
 class FormListView extends StatelessWidget {
@@ -40,8 +40,11 @@ class FormListView extends StatelessWidget {
                     children: [
                       Text(
                         formList[index].label ??= '',
+                        style: Theme.of(context).textTheme.bodyMedium,
                         overflow: TextOverflow.ellipsis,),
+                      const SizedBox(height: 2,),
                       Text(formList[index].description ??= '',
+                        style: Theme.of(context).textTheme.bodySmall,
                       overflow: TextOverflow.ellipsis,)
                     ],
                   ),

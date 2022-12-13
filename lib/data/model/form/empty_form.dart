@@ -2,7 +2,7 @@
 //
 //     final emptyForm = emptyFormFromJson(jsonString);
 
-import 'fields/field_model.dart';
+import '../fields/field_model.dart';
 
 class EmptyForm {
   EmptyForm({

@@ -63,7 +63,7 @@ class WorxThemeData {
     // bodySmall: GoogleFonts.oswald(fontWeight: _semiBold, fontSize: 16.0),
     headlineSmall: TextStyle(fontFamily:'RobotoMono', fontWeight: FontWeight.w400, fontSize: 16.0),
      titleMedium: TextStyle(fontFamily: 'RobotoMono', fontWeight: FontWeight.w500, fontSize: 18.0),
-    // labelSmall: GoogleFonts.montserrat(fontWeight: _medium, fontSize: 12.0),
+    labelSmall: TextStyle(fontFamily: 'RobotoMono', fontWeight: FontWeight.w400, fontSize: 12.0),
     // bodyLarge: GoogleFonts.montserrat(fontWeight: _regular, fontSize: 14.0),
     // titleSmall: GoogleFonts.montserrat(fontWeight: _medium, fontSize: 14.0),
      bodyMedium: TextStyle(fontFamily: 'RobotoMono', fontWeight: FontWeight.w400, fontSize: 14.0),
