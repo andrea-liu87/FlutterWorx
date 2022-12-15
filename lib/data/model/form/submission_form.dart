@@ -2,6 +2,7 @@
 //
 //     final submissionForm = submissionFormFromJson(jsonString);
 
+import 'package:worx/data/model/form/empty_form.dart';
 import 'package:worx/data/model/response_device_info.dart';
 
 import '../fields/field_model.dart';
@@ -54,6 +55,15 @@ class SubmissionForm {
     submitDate: json["submit_date"],
     submitInZone: json["submit_in_zone"],
     submitLocation: SubmitLocation.fromJson(json["submit_location"]),
+  );
+
+  factory SubmissionForm.fromEmptyForm(EmptyForm form) => SubmissionForm(
+    id: form.id,
+    label: form.label,
+    description: form.description,
+    fields: form.fields,
+      createdOn: form.createdOn,
+    modifiedOn: form.modifiedOn
   );
 
   Map<String, dynamic> toJson() => {

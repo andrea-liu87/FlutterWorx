@@ -34,7 +34,7 @@ class WorxThemeData {
     onBackground: Colors.white,
     error: _defaultFillColor,
     onError: _defaultFillColor,
-    onPrimary: _defaultFillColor,
+    onPrimary: Colors.white,
     onSecondary: Color(0xFF322942),
     onSurface: Color(0xFF241E30),
     brightness: Brightness.light,

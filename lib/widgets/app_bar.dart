@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:worx/routes.dart';
 
 class WelcomeAppBar extends StatelessWidget with PreferredSizeWidget {
   final String title;
@@ -12,7 +13,11 @@ class WelcomeAppBar extends StatelessWidget with PreferredSizeWidget {
   @override
   Widget build(BuildContext context) {
     return AppBar(
-      iconTheme: IconThemeData(
+      leading: InkWell(
+        onTap: (){AppNavigator.pop();},
+        child: Icon(Icons.arrow_back, color: Theme.of(context).colorScheme.onPrimary,),
+      ),
+      iconTheme: const IconThemeData(
         color: Colors.white, //change your color here
       ),
       backgroundColor: Theme.of(context).primaryColor,

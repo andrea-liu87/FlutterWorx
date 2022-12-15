@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:worx/core/fade_page_route.dart';
 import 'package:worx/pages/create_new_team.dart';
 import 'package:worx/pages/create_team_submit.dart';
+import 'package:worx/pages/detail_page.dart';
 import 'package:worx/pages/home_page.dart';
 import 'package:worx/pages/join_request_submitted.dart';
 import 'package:worx/pages/join_team.dart';
@@ -11,7 +12,7 @@ import 'package:worx/pages/welcome.dart';
 enum Routes { splash, welcome,
   createTeam, createTeamSubmit,
   joinTeam, joinTeamSubmit, joinTeamRejected,
-  home}
+  home, detail }
 
 class _Paths {
   static const String splash = '/';
@@ -22,6 +23,7 @@ class _Paths {
   static const String joinTeamSubmit = 'welcome/joinTeam/joinTeamSubmit';
   static const String joinTeamRejected = 'welcome/joinTeam/joinTeamRejected';
   static const String home = '/home';
+  static const String detail = '/home/detail';
 
 
   static const Map<Routes, String> _pathMap = {
@@ -32,7 +34,8 @@ class _Paths {
     Routes.joinTeam: _Paths.joinTeam,
     Routes.joinTeamSubmit: _Paths.joinTeamSubmit,
     Routes.joinTeamRejected: _Paths.joinTeamRejected,
-    Routes.home: _Paths.home
+    Routes.home: _Paths.home,
+    Routes.detail: _Paths.detail
   };
 
   static String of(Routes route) => _pathMap[route] ?? splash;
@@ -66,6 +69,9 @@ class AppNavigator {
 
       case _Paths.home:
         return FadeRoute(page: const HomePage());
+
+      case _Paths.detail:
+        return FadeRoute(page: const DetailPage());
 
       default:
         return FadeRoute(page: const SplashPage());
