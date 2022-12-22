@@ -5,7 +5,7 @@ import '../constants.dart';
 import '../providers/join_team_provider.dart';
 import '../widgets/app_bar.dart';
 import '../widgets/buttons.dart';
-import '../widgets/text_field.dart';
+import '../widgets/components/form_text_field.dart';
 
 class JoinTeam extends StatefulWidget {
   const JoinTeam({Key? key}) : super(key: key);

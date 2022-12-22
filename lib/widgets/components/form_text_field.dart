@@ -5,12 +5,14 @@ class FormTextField extends StatefulWidget {
     final TextInputType keyboardType;
     final bool isPasswordField;
     Function(String) onSave;
+    String initialValue;
 
     FormTextField(
       {Key? key,
       required this.title,
       this.keyboardType = TextInputType.text,
       this.isPasswordField = false,
+        this.initialValue = '',
       required this.onSave})
       : super(key: key);
 
@@ -32,6 +34,7 @@ class _FormTextFieldState extends State<FormTextField> {
                 Text(widget.title, style: Theme.of(context).textTheme.headlineSmall,),
                 SizedBox(height: 10,),
               TextFormField(
+                initialValue: widget.initialValue,
             keyboardType: widget.keyboardType,
             obscureText: _isPasswordTextVisible,
             style: Theme.of(context).textTheme.bodyMedium,

@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:worx/data/model/value/text_value.dart';
 import 'package:worx/widgets/app_bar.dart';
 
 import '../data/model/fields/field_model.dart';
 import '../data/model/value/value.dart';
 import '../providers/detail_form_provider.dart';
-import '../widgets/text_field.dart';
+import '../widgets/components/form_text_field.dart';
 
 class DetailPage extends StatefulWidget {
   const DetailPage({Key? key}) : super(key: key);
@@ -28,23 +29,30 @@ class _DetailPageState extends State<DetailPage> {
             var form = detailProvider.submissionForm.fields[index];
             var id = form.id;
             var value = detailProvider.submissionForm.values[id];
-            return buildFormComponent(
-              form, value);},
+            return buildFormComponent(form, value, (String id, Value? value) {
+              detailProvider.saveValue(id, value);
+            });
+          },
           separatorBuilder: (BuildContext context, int index) => Container(
-            height: 2,
-            color: Colors.black54,
-          ),
+                height: 2,
+                color: Colors.black54,
+              ),
           itemCount: detailProvider.submissionForm.fields.length),
     );
   }
 
-  Widget buildFormComponent(Field field, Value? value){
-    if (field.type == FieldType.text){
+  Widget buildFormComponent(
+      Field field, Value? value, Function(String, Value) saveValue) {
+    var id = field.id!;
+    if (field.type == FieldType.text) {
       return FormTextField(
-          title: field.label ??= '',
-          onSave: (String text) {  },
+        title: field.label ??= '',
+        initialValue: (value == null) ? '' : (value as TextValue).value ??= '',
+        onSave: (String text) {
+          saveValue(id, TextValue(value: text));
+        },
       );
     }
-    return Container(child: Text('field'),);
+    return Container(child: Text('unidentified field'),);
   }
 }

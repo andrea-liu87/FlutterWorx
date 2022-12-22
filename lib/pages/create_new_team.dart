@@ -4,7 +4,7 @@ import 'package:worx/data/model/create_team_model.dart';
 import 'package:worx/providers/create_new_team_provider.dart';
 import 'package:worx/widgets/app_bar.dart';
 import 'package:worx/widgets/buttons.dart';
-import 'package:worx/widgets/text_field.dart';
+import 'package:worx/widgets/components/form_text_field.dart';
 
 import '../constants.dart';
 
