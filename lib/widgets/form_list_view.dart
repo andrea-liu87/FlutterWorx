@@ -48,20 +48,24 @@ class FormListView extends StatelessWidget {
                     padding: const EdgeInsets.symmetric(horizontal: 20),
                     child: IconWidget(asset: 'assets/images/ic_form_gray.png'),
                   ),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 13),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          formList[index].label ??= '',
-                          style: Theme.of(context).textTheme.bodyMedium,
-                          overflow: TextOverflow.ellipsis,),
-                        const SizedBox(height: 2,),
-                        Text(formList[index].description ??= '',
-                          style: Theme.of(context).textTheme.bodySmall,
-                        overflow: TextOverflow.ellipsis,)
-                      ],
+                  Flexible(
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 13),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            formList[index].label ??= '',
+                            style: Theme.of(context).textTheme.bodyMedium,
+                            overflow: TextOverflow.ellipsis,
+                            maxLines: 1,),
+                          const SizedBox(height: 2,),
+                          Text(formList[index].description ??= '',
+                            style: Theme.of(context).textTheme.bodySmall,
+                            overflow: TextOverflow.ellipsis,
+                            maxLines: 1,)
+                        ],
+                      ),
                     ),
                   ),
                 ],

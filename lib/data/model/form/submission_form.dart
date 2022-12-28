@@ -3,7 +3,7 @@
 //     final submissionForm = submissionFormFromJson(jsonString);
 
 import 'package:worx/data/model/form/empty_form.dart';
-import 'package:worx/data/model/response_device_info.dart';
+import 'package:worx/data/model/value/value.dart';
 
 import '../fields/field_model.dart';
 

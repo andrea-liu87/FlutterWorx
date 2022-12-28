@@ -35,7 +35,7 @@ class WorxThemeData {
     error: _defaultFillColor,
     onError: _defaultFillColor,
     onPrimary: Colors.white,
-    onSecondary: Color(0xFF322942),
+    onSecondary: Colors.black,
     onSurface: Color(0xFF241E30),
     brightness: Brightness.light,
   );
@@ -51,7 +51,7 @@ class WorxThemeData {
     error: _darkFillColor,
     onError: _darkFillColor,
     onPrimary: _darkFillColor,
-    onSecondary: _darkFillColor,
+    onSecondary: Colors.black,
     onSurface: _darkFillColor,
     brightness: Brightness.dark,
   );

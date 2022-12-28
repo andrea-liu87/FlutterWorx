@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:worx/data/model/fields/radio_button_model.dart';
+import 'package:worx/data/model/value/radiobutton_value.dart';
 import 'package:worx/data/model/value/text_value.dart';
 import 'package:worx/widgets/app_bar.dart';
 
 import '../data/model/fields/field_model.dart';
 import '../data/model/value/value.dart';
 import '../providers/detail_form_provider.dart';
+import '../widgets/components/form_radio_button.dart';
 import '../widgets/components/form_text_field.dart';
 
 class DetailPage extends StatefulWidget {
@@ -52,7 +55,14 @@ class _DetailPageState extends State<DetailPage> {
           saveValue(id, TextValue(value: text));
         },
       );
+    } else if (field.type == FieldType.radio_group) {
+      return FormRadioButton(
+        field: field as RadioButton,
+        value: (value != null) ? value as RadioButtonValue : null,
+      );
     }
-    return Container(child: Text('unidentified field'),);
+    return Container(
+      child: Text('unidentified field'),
+    );
   }
 }

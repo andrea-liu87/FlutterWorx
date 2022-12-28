@@ -1,5 +1,7 @@
 
 
+import 'package:worx/data/model/fields/radio_button_model.dart';
+
 enum FieldType {
   text,
   checkbox_group,
@@ -41,13 +43,18 @@ class Field {
   bool? required;
 
 
-  factory Field.fromJson(Map<String, dynamic> json) => Field(
-    id: json["id"],
-    label: json["label"],
-    description: json["description"],
-    type: typeValue.map[json["type"]],
-    required: json["required"],
-  );
+  factory Field.fromJson(Map<String, dynamic> json) {
+    if (typeValue.map[json["type"]] == FieldType.radio_group){
+      return RadioButton.fromJson(json);
+    }
+    return Field(
+      id: json["id"],
+      label: json["label"],
+      description: json["description"],
+      type: typeValue.map[json["type"]],
+      required: json["required"],
+    );
+  }
 
   Map<String, dynamic> toJson() => {
     "id": id,

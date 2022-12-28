@@ -45,6 +45,7 @@ dependencies:
   dartz: ^0.10.1
   connectivity_plus: ^3.0.2 #check network
   intl: ^0.17.0
+  dynamic_height_grid_view: ^0.0.3
 
   # UI Lib
 
