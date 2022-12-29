@@ -33,7 +33,7 @@ class _FormRadioButtonState extends State<FormRadioButton> {
           DynamicHeightGridView(
             itemCount: widget.field.options.length,
               crossAxisCount: 2,
-              mainAxisSpacing: 8,
+              mainAxisSpacing: marginHorizontal/2,
               shrinkWrap: true,
               builder: (context, index) => LabeledRadio(
                   value: widget.field.options[index],
