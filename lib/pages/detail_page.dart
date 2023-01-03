@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:worx/data/model/fields/check_box_model.dart';
+import 'package:worx/data/model/fields/dropdown_model.dart';
 import 'package:worx/data/model/fields/radio_button_model.dart';
 import 'package:worx/data/model/value/checkbox_value.dart';
 import 'package:worx/data/model/value/radiobutton_value.dart';
@@ -8,8 +9,10 @@ import 'package:worx/data/model/value/text_value.dart';
 import 'package:worx/theme/worx_theme.dart';
 import 'package:worx/widgets/app_bar.dart';
 import 'package:worx/widgets/components/form_checkbox.dart';
+import 'package:worx/widgets/components/form_dropdown.dart';
 
 import '../data/model/fields/field_model.dart';
+import '../data/model/value/dropdown_value.dart';
 import '../data/model/value/value.dart';
 import '../providers/detail_form_provider.dart';
 import '../widgets/components/form_radio_button.dart';
@@ -65,6 +68,11 @@ class _DetailPageState extends State<DetailPage> {
           field: field as CheckBox,
           value: (value != null) ? value as CheckBoxValue : null,);
       }
+    if (field.type == FieldType.dropdown) {
+      return FormDropDown(
+        field: field as DropDown,
+        value: (value != null) ? value as DropDownValue : null,);
+    }
       if (field.type == FieldType.radio_group) {
       return FormRadioButton(
         field: field as RadioButton,

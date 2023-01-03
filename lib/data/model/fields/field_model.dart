@@ -1,6 +1,7 @@
 
 
 import 'package:worx/data/model/fields/check_box_model.dart';
+import 'package:worx/data/model/fields/dropdown_model.dart';
 import 'package:worx/data/model/fields/radio_button_model.dart';
 
 enum FieldType {
@@ -51,6 +52,9 @@ class Field {
     if (typeValue.map[json["type"]] == FieldType.checkbox_group){
       return CheckBox.fromJson(json);
     }
+    if (typeValue.map[json["type"]] == FieldType.dropdown) {
+      return DropDown.fromJson(json);
+    }
     return Field(
       id: json["id"],
       label: json["label"],
@@ -60,13 +64,18 @@ class Field {
     );
   }
 
-  Map<String, dynamic> toJson() => {
-    "id": id,
-    "label":label,
-    "description": description,
-    "type": typeValue.reverse[type],
-    "required": required,
-  };
+  Map<String, dynamic> toJson() {
+    if (type == FieldType.checkbox_group){
+      //return CheckBox().toJson();
+    }
+    return {
+      "id": id,
+      "label": label,
+      "description": description,
+      "type": typeValue.reverse[type],
+      "required": required,
+    };
+  }
 }
 
 class Group {

@@ -56,7 +56,8 @@ class WorxThemeData {
     brightness: Brightness.dark,
   );
 
-  static final Color dividerColor = Color(0xFFF0F0F0);
+  static final Color dividerColor = const Color(0xFFF0F0F0);
+  static final Color grayText = const Color(0xFF707070);
 
   static const TextTheme _textTheme = TextTheme(
     headlineMedium: TextStyle(fontFamily:'RobotoMono', fontWeight: FontWeight.w700, fontSize: 20.0),
